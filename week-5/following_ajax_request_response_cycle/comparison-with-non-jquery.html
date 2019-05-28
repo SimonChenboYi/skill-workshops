@@ -5,25 +5,31 @@
 
     <script>
       // jQuery AJAX
-      $.get("https://async-workshops-api.herokuapp.com/people", function(peopleResponse) {
-        $("#person").html(peopleResponse[0].name);
-      });
-      
+      // $.get("https://async-workshops-api.herokuapp.com/people", function(peopleResponse) {
+      //   $("#person").html(peopleResponse[0].name);
+      // });
+
+
       // non-jQuery AJAX (jQuery AJAX does this, behind the scenes)
       function getPeople() {
         var xhttp = new XMLHttpRequest();
-        
+
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-           document.getElementById("person").innerHTML = this.responseText[0].name;
+
+            let people = JSON.parse(this.responseText);
+            document.getElementById("person").innerHTML = people[0].name;
+          //  document.getElementById("person").innerHTML = this.responseText[0].name;
           }
+
         };
-        
+
         xhttp.open("GET", "https://async-workshops-api.herokuapp.com/people", true);
         xhttp.send();
       };
-      
+
       getPeople();
+
     </script>
   </head>
 
